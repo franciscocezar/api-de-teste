@@ -6,6 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -19,15 +22,21 @@ public class Usuario {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "nome", length = 200, nullable = true)
+    @NotBlank(message = "Nome é obrigatório!")
+    @Size(min= 3, message = "Nome deve ter no mínimo 3 caracteres")
+    @Column(name = "nome", length = 200, nullable = false)
     private String nome;
     
-    @Column(name = "email", length = 50, nullable = true)
+    @Email(message = "Insira um email válido!")
+    @NotBlank(message = "Email é obrigatório!")
+    @Column(name = "email", length = 50, nullable = false)
     private String email;
     
-    @Column(name = "senha", columnDefinition = "TEXT", nullable = true)
+    @NotBlank(message = "Senha é obrigatória!")
+    @Column(name = "senha", columnDefinition = "TEXT", nullable = false)
     private String senha;
     
-    @Column(name = "telefone", length = 15, nullable = true)
+    @NotBlank(message = "Telefone é obrigatório!")
+    @Column(name = "telefone", length = 15, nullable = false)
     private String telefone;
 }
